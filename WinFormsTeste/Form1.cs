@@ -17,7 +17,7 @@ namespace WinFormsTeste
     {
 
         //String que sinaliza quebras de linha em textos.
-        string newLine = System.Environment.NewLine;
+        string newLine = Environment.NewLine;
 
         //Instanciando objeto de acesso às portas COMs.
         SerialPort _serialPort = new SerialPort();
@@ -135,6 +135,7 @@ namespace WinFormsTeste
 
         private void salvarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
 
             if (txt1.Text.Length + txt2.Text.Length + txt3.Text.Length == totalMaxLength)
@@ -147,6 +148,7 @@ namespace WinFormsTeste
 
                 if (salvaArquivo.ShowDialog() == DialogResult.OK)
                 {
+
                     File.WriteAllText(salvaArquivo.FileName, $"{txt1.Text}\n" +
                                                              $"{txt2.Text}\n" +
                                                              $"{txt3.Text}");
@@ -194,8 +196,6 @@ namespace WinFormsTeste
                     }
                 }
 
-                //MessageBox.Show($"String extraída:\n\n{strArquivo}\n\nComprimento: {strArquivo.Length}");
-                //MessageBox.Show("Arquivo carregado com sucesso.");
                 consoleSaida.AppendText($"[!] Arquivo carregado de {abrirArquivo.FileName}" + newLine + newLine);
             }
         }
