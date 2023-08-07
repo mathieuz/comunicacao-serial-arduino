@@ -147,7 +147,6 @@ namespace WinFormsTeste
 
                 if (salvaArquivo.ShowDialog() == DialogResult.OK)
                 {
-
                     File.WriteAllText(salvaArquivo.FileName, $"{txt1.Text}\n" +
                                                              $"{txt2.Text}\n" +
                                                              $"{txt3.Text}");
