@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO.Ports;
+using System.IO.Ports;  //Para comunicação de portas seriais.
 using System.Windows.Forms;
 using System.IO;
-using System.Security.Cryptography;
+using NullFX.CRC; //Cálculo de CRC das informações enviadas.
 
 namespace WinFormsTeste
 {
@@ -28,6 +28,9 @@ namespace WinFormsTeste
         //Recebe o total da soma de todos os limites de caracteres dos três inputs.
         int totalMaxLength;
 
+        //Array de textboxes
+        List<TextBox> listTextbox = new List<TextBox>();
+
         public Form1()
         {
             InitializeComponent();
@@ -38,6 +41,11 @@ namespace WinFormsTeste
             }
 
             comboBoxCOM.SelectedIndex = 0; //Seleciona o primeiro do índice de itens da combobox.
+
+            //Inicializando lista de textboxes com os três textboxes padrões.
+            listTextbox.Add(txt1);
+            listTextbox.Add(txt2);
+            listTextbox.Add(txt3);
 
         }
 
@@ -58,17 +66,19 @@ namespace WinFormsTeste
                         _serialPort.Open();
 
                         comboBoxCOM.Enabled = false;
+
                         groupBox_Enviar.Enabled = true;
                         salvarComoToolStripMenuItem.Enabled = true;
+                        abrirToolStripMenuItem.Enabled = true;
 
                         btConectar.Text = "Desconectar";
 
-                        MessageBox.Show($"Conectado com sucesso na porta {portSelecionado}.");
+                        consoleSaida.AppendText($"[!] Conectado na porta {portSelecionado}." + newLine + newLine);
 
                     }
                     catch (Exception erro)
                     {
-                        MessageBox.Show("Não foi possível se conectar.\n\n" + erro.Message, "Erro");
+                        consoleSaida.AppendText($"[Erro] Não foi possível se conectar: {erro.Message}" + newLine + newLine);
                     }
 
                 }
@@ -79,16 +89,18 @@ namespace WinFormsTeste
                 //Desconecta da porta.
                 _serialPort.Close();
 
-                //Desabilitando interações com alguns elementos.
+                //Desabilitando/habilitand interações de elementos e limpando campos quando desconectado.
                 comboBoxCOM.Enabled = true;
+
                 groupBox_Enviar.Enabled = false;
                 salvarComoToolStripMenuItem.Enabled = false;
+                abrirToolStripMenuItem.Enabled = false;
 
-                txt1.Clear();
-                txt2.Clear();
-                txt3.Clear();
+                foreach (TextBox tb in listTextbox) { tb.Clear(); }
 
                 btConectar.Text = "Conectar";
+
+                consoleSaida.AppendText($"[!] Desconectado da porta {portSelecionado}." + newLine + newLine);
 
             }
 
@@ -101,16 +113,22 @@ namespace WinFormsTeste
 
             if (strConcat.Length == totalMaxLength)
             {
-                _serialPort.Write(strConcat);   //Escreve os valores na porta especificada.
+                //Calculando CRC da string enviada. A string deve ser convertida em um Array de bytes antes.
+                byte[] strConcatBytes = Encoding.UTF8.GetBytes(strConcat);
+                string strConcatCrc = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes).ToString(); //Recebe o CRC referente à string.
+                ushort teste = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes);
+                _serialPort.Write(strConcat + ";" + strConcatCrc);   //Escreve a string concatenada com um valor separador (;), que
+                                                                     //está concatenada ao valor gerado pelo CRC
+                                                                     //na porta serial.
 
-                consoleSaida.AppendText("Enviado: " + strConcat + newLine); //Exibe os valores de entrada.
+                //Exibe os valores enviados no console de saída.
+                consoleSaida.AppendText("[!] Enviado: " + strConcat + newLine);
+                consoleSaida.AppendText("CRC: " + strConcatCrc + newLine + newLine);
 
 
             } else
             {
-                MessageBox.Show("A informação enviada é inválida.", "Erro");
-
-                consoleSaida.AppendText("Erro: a informação enviada é inválida." + newLine); //Exibe os valores de entrada.
+                consoleSaida.AppendText($"[Erro] Os valores dos campos preenchidos não somam {totalMaxLength} caracteres. Preencha-os e tente novamente." + newLine + newLine);
 
             }
         }
@@ -127,20 +145,59 @@ namespace WinFormsTeste
                 salvaArquivo.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 salvaArquivo.DefaultExt = "txt";
 
-                OpenFileDialog abrirArquivo = new OpenFileDialog();
-
                 if (salvaArquivo.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(salvaArquivo.FileName, $"Valores salvos:\n\n" +
-                                                             $"Valor 1: {txt1.Text}\n" +
-                                                             $"Valor 2: {txt2.Text}\n" +
-                                                             $"Valor 3: {txt3.Text}");
+
+                    File.WriteAllText(salvaArquivo.FileName, $"{txt1.Text}\n" +
+                                                             $"{txt2.Text}\n" +
+                                                             $"{txt3.Text}");
+
+                    consoleSaida.AppendText($"[!] O arquivo foi salvo em {salvaArquivo.FileName}" + newLine + newLine);
                 }
 
             } else
             {
-                MessageBox.Show("Não foi possível salvar: os valores dos campos não somam 48 caracteres. Tente novamente.", "Erro");
+                consoleSaida.AppendText($"[Erro] Impossível salvar: os valores dos campos preenchidos não somam {totalMaxLength} caracteres. Preencha-os e tente novamente." + newLine + newLine);
             
+            }
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog abrirArquivo = new OpenFileDialog();
+            abrirArquivo.RestoreDirectory = true;
+            abrirArquivo.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            abrirArquivo.DefaultExt = "txt";
+
+            if (abrirArquivo.ShowDialog() == DialogResult.OK)
+            {
+                //Armazenando o valor da string extraída.
+                string strArquivo = File.ReadAllText(abrirArquivo.FileName, Encoding.UTF8);
+
+                //Contador de índices do Textbox.
+                int contadorTextBox = 0;
+
+                //Limpando os valores preenchidos nos textboxes primeiro antes de preencher
+                //com os valores lidos do txt.
+                foreach (TextBox tb in listTextbox) { tb.Clear(); }
+
+                //Preenchendo os textboxes com os valores.
+                for (int i = 0; i < strArquivo.Length; i++)
+                {
+                    if (strArquivo[i] != '\n')
+                    {
+                        listTextbox[contadorTextBox].Text += strArquivo[i].ToString();
+
+                    } else
+                    {
+                        contadorTextBox++;  //Quando o caractere na posição de i for igual
+                                            //à um pulo de linha, passa para o próximo vetor.
+                    }
+                }
+
+                //MessageBox.Show($"String extraída:\n\n{strArquivo}\n\nComprimento: {strArquivo.Length}");
+                //MessageBox.Show("Arquivo carregado com sucesso.");
+                consoleSaida.AppendText($"[!] Arquivo carregado de {abrirArquivo.FileName}" + newLine + newLine);
             }
         }
     }

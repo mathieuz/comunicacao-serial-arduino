@@ -129,10 +129,11 @@
             // consoleSaida
             // 
             this.consoleSaida.BackColor = System.Drawing.SystemColors.Desktop;
-            this.consoleSaida.Enabled = false;
             this.consoleSaida.Location = new System.Drawing.Point(6, 20);
             this.consoleSaida.Multiline = true;
             this.consoleSaida.Name = "consoleSaida";
+            this.consoleSaida.ReadOnly = true;
+            this.consoleSaida.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.consoleSaida.Size = new System.Drawing.Size(419, 127);
             this.consoleSaida.TabIndex = 0;
             // 
@@ -158,9 +159,11 @@
             // 
             // abrirToolStripMenuItem
             // 
+            this.abrirToolStripMenuItem.Enabled = false;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // salvarComoToolStripMenuItem
             // 
@@ -202,11 +205,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btConectar;
         private System.Windows.Forms.ComboBox comboBoxCOM;
-        private System.Windows.Forms.TextBox txt1;
         private System.Windows.Forms.TextBox txt2;
         private System.Windows.Forms.TextBox txt3;
         private System.Windows.Forms.Button btEnviar;
@@ -218,6 +218,7 @@
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salvarComoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
+        private System.Windows.Forms.TextBox txt1;
     }
 }
 
