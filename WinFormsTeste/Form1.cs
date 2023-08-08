@@ -33,6 +33,8 @@ namespace WinFormsTeste
 
         public Form1()
         {
+            //Injcializando elementos na tela.
+
             InitializeComponent();
 
             //Adiciona números possíveis de portas COMs selecionáveis dentro da Combobox.
@@ -46,6 +48,17 @@ namespace WinFormsTeste
             listTextbox.Add(txt1);
             listTextbox.Add(txt2);
             listTextbox.Add(txt3);
+
+
+            //Inicializando comboboxes 'Modo de Operação' e 'Classe'.
+            comboBoxModoOperacao.Items.Add("OTAA");
+            comboBoxModoOperacao.Items.Add("ABP");
+            comboBoxModoOperacao.SelectedIndex = 0;
+
+            comboBoxClasse.Items.Add("A");
+            comboBoxClasse.Items.Add("B");
+            comboBoxClasse.Items.Add("C");
+            comboBoxClasse.SelectedIndex = 0;
 
         }
 
@@ -116,7 +129,7 @@ namespace WinFormsTeste
                 //Calculando CRC da string enviada. A string deve ser convertida em um Array de bytes antes.
                 byte[] strConcatBytes = Encoding.UTF8.GetBytes(strConcat);
                 string strConcatCrc = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes).ToString(); //Recebe o CRC referente à string.
-                ushort teste = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes);
+                //ushort teste = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes);
                 _serialPort.Write(strConcat + ";" + strConcatCrc);   //Escreve a string concatenada com um valor separador (;), que
                                                                      //está concatenada ao valor gerado pelo CRC
                                                                      //na porta serial.
@@ -197,6 +210,22 @@ namespace WinFormsTeste
                 }
 
                 consoleSaida.AppendText($"[!] Arquivo carregado de {abrirArquivo.FileName}" + newLine + newLine);
+            }
+        }
+
+        //Verifica se o valor de classe selecionado é igual a A: se sim, a opção de inserir
+        //um valor de uplink é habilitada.
+        private void comboBoxClasse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string valorSelecionado = comboBoxClasse.SelectedItem.ToString();
+
+            switch (valorSelecionado)
+            {
+                case "A":
+                    upDownUplink.Enabled = true; break;
+
+                default:
+                    upDownUplink.Enabled = false; break;
             }
         }
     }

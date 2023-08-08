@@ -35,6 +35,15 @@
             this.txt3 = new System.Windows.Forms.TextBox();
             this.btEnviar = new System.Windows.Forms.Button();
             this.groupBox_Enviar = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.upDownUplink = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxClasse = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxModoOperacao = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_Saida = new System.Windows.Forms.GroupBox();
             this.consoleSaida = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -43,6 +52,7 @@
             this.salvarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_Enviar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownUplink)).BeginInit();
             this.groupBox_Saida.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +61,7 @@
             // 
             this.btConectar.Location = new System.Drawing.Point(12, 43);
             this.btConectar.Name = "btConectar";
-            this.btConectar.Size = new System.Drawing.Size(90, 21);
+            this.btConectar.Size = new System.Drawing.Size(114, 21);
             this.btConectar.TabIndex = 0;
             this.btConectar.Text = "Conectar";
             this.btConectar.UseVisualStyleBackColor = true;
@@ -61,9 +71,9 @@
             // 
             this.comboBoxCOM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCOM.FormattingEnabled = true;
-            this.comboBoxCOM.Location = new System.Drawing.Point(108, 43);
+            this.comboBoxCOM.Location = new System.Drawing.Point(132, 44);
             this.comboBoxCOM.Name = "comboBoxCOM";
-            this.comboBoxCOM.Size = new System.Drawing.Size(335, 21);
+            this.comboBoxCOM.Size = new System.Drawing.Size(351, 21);
             this.comboBoxCOM.TabIndex = 1;
             // 
             // txt1
@@ -71,30 +81,30 @@
             this.txt1.Location = new System.Drawing.Point(6, 44);
             this.txt1.MaxLength = 16;
             this.txt1.Name = "txt1";
-            this.txt1.Size = new System.Drawing.Size(347, 21);
+            this.txt1.Size = new System.Drawing.Size(459, 21);
             this.txt1.TabIndex = 2;
             // 
             // txt2
             // 
-            this.txt2.Location = new System.Drawing.Point(6, 81);
+            this.txt2.Location = new System.Drawing.Point(6, 102);
             this.txt2.MaxLength = 16;
             this.txt2.Name = "txt2";
-            this.txt2.Size = new System.Drawing.Size(347, 21);
+            this.txt2.Size = new System.Drawing.Size(459, 21);
             this.txt2.TabIndex = 3;
             // 
             // txt3
             // 
-            this.txt3.Location = new System.Drawing.Point(6, 116);
+            this.txt3.Location = new System.Drawing.Point(6, 159);
             this.txt3.MaxLength = 16;
             this.txt3.Name = "txt3";
-            this.txt3.Size = new System.Drawing.Size(347, 21);
+            this.txt3.Size = new System.Drawing.Size(459, 21);
             this.txt3.TabIndex = 4;
             // 
             // btEnviar
             // 
-            this.btEnviar.Location = new System.Drawing.Point(365, 44);
+            this.btEnviar.Location = new System.Drawing.Point(6, 323);
             this.btEnviar.Name = "btEnviar";
-            this.btEnviar.Size = new System.Drawing.Size(60, 92);
+            this.btEnviar.Size = new System.Drawing.Size(459, 31);
             this.btEnviar.TabIndex = 7;
             this.btEnviar.Text = "Enviar";
             this.btEnviar.UseVisualStyleBackColor = true;
@@ -102,6 +112,15 @@
             // 
             // groupBox_Enviar
             // 
+            this.groupBox_Enviar.Controls.Add(this.label6);
+            this.groupBox_Enviar.Controls.Add(this.upDownUplink);
+            this.groupBox_Enviar.Controls.Add(this.label5);
+            this.groupBox_Enviar.Controls.Add(this.comboBoxClasse);
+            this.groupBox_Enviar.Controls.Add(this.label4);
+            this.groupBox_Enviar.Controls.Add(this.comboBoxModoOperacao);
+            this.groupBox_Enviar.Controls.Add(this.label3);
+            this.groupBox_Enviar.Controls.Add(this.label2);
+            this.groupBox_Enviar.Controls.Add(this.label1);
             this.groupBox_Enviar.Controls.Add(this.txt1);
             this.groupBox_Enviar.Controls.Add(this.btEnviar);
             this.groupBox_Enviar.Controls.Add(this.txt2);
@@ -110,18 +129,113 @@
             this.groupBox_Enviar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_Enviar.Location = new System.Drawing.Point(12, 95);
             this.groupBox_Enviar.Name = "groupBox_Enviar";
-            this.groupBox_Enviar.Size = new System.Drawing.Size(431, 153);
+            this.groupBox_Enviar.Size = new System.Drawing.Size(471, 360);
             this.groupBox_Enviar.TabIndex = 8;
             this.groupBox_Enviar.TabStop = false;
             this.groupBox_Enviar.Text = "Enviar";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 258);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(205, 15);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Tempo em milissegundos de Uplink";
+            // 
+            // upDownUplink
+            // 
+            this.upDownUplink.Increment = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.upDownUplink.Location = new System.Drawing.Point(6, 276);
+            this.upDownUplink.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.upDownUplink.Name = "upDownUplink";
+            this.upDownUplink.Size = new System.Drawing.Size(459, 21);
+            this.upDownUplink.TabIndex = 18;
+            this.upDownUplink.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(235, 196);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 15);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Classe";
+            // 
+            // comboBoxClasse
+            // 
+            this.comboBoxClasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxClasse.FormattingEnabled = true;
+            this.comboBoxClasse.Location = new System.Drawing.Point(238, 214);
+            this.comboBoxClasse.Name = "comboBoxClasse";
+            this.comboBoxClasse.Size = new System.Drawing.Size(227, 23);
+            this.comboBoxClasse.TabIndex = 15;
+            this.comboBoxClasse.SelectedIndexChanged += new System.EventHandler(this.comboBoxClasse_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 196);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 15);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Modo de Operação";
+            // 
+            // comboBoxModoOperacao
+            // 
+            this.comboBoxModoOperacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxModoOperacao.FormattingEnabled = true;
+            this.comboBoxModoOperacao.Location = new System.Drawing.Point(6, 214);
+            this.comboBoxModoOperacao.Name = "comboBoxModoOperacao";
+            this.comboBoxModoOperacao.Size = new System.Drawing.Size(226, 23);
+            this.comboBoxModoOperacao.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 141);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 15);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "NWKSKEY";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 15);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "APPSKEY";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "APPKEY";
             // 
             // groupBox_Saida
             // 
             this.groupBox_Saida.Controls.Add(this.consoleSaida);
             this.groupBox_Saida.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Saida.Location = new System.Drawing.Point(12, 275);
+            this.groupBox_Saida.Location = new System.Drawing.Point(12, 461);
             this.groupBox_Saida.Name = "groupBox_Saida";
-            this.groupBox_Saida.Size = new System.Drawing.Size(431, 153);
+            this.groupBox_Saida.Size = new System.Drawing.Size(471, 143);
             this.groupBox_Saida.TabIndex = 9;
             this.groupBox_Saida.TabStop = false;
             this.groupBox_Saida.Text = "Saída";
@@ -129,12 +243,12 @@
             // consoleSaida
             // 
             this.consoleSaida.BackColor = System.Drawing.SystemColors.Desktop;
-            this.consoleSaida.Location = new System.Drawing.Point(6, 20);
+            this.consoleSaida.Location = new System.Drawing.Point(6, 26);
             this.consoleSaida.Multiline = true;
             this.consoleSaida.Name = "consoleSaida";
             this.consoleSaida.ReadOnly = true;
             this.consoleSaida.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.consoleSaida.Size = new System.Drawing.Size(419, 127);
+            this.consoleSaida.Size = new System.Drawing.Size(459, 111);
             this.consoleSaida.TabIndex = 0;
             // 
             // menuStrip1
@@ -144,7 +258,7 @@
             this.sobreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(455, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(495, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -161,7 +275,7 @@
             // 
             this.abrirToolStripMenuItem.Enabled = false;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
@@ -169,7 +283,7 @@
             // 
             this.salvarComoToolStripMenuItem.Enabled = false;
             this.salvarComoToolStripMenuItem.Name = "salvarComoToolStripMenuItem";
-            this.salvarComoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salvarComoToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.salvarComoToolStripMenuItem.Text = "Salvar como...";
             this.salvarComoToolStripMenuItem.Click += new System.EventHandler(this.salvarComoToolStripMenuItem_Click);
             // 
@@ -181,7 +295,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(455, 437);
+            this.ClientSize = new System.Drawing.Size(495, 616);
             this.Controls.Add(this.groupBox_Saida);
             this.Controls.Add(this.groupBox_Enviar);
             this.Controls.Add(this.comboBoxCOM);
@@ -191,9 +305,11 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comunicação Serial - Arduino";
             this.groupBox_Enviar.ResumeLayout(false);
             this.groupBox_Enviar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownUplink)).EndInit();
             this.groupBox_Saida.ResumeLayout(false);
             this.groupBox_Saida.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -219,6 +335,15 @@
         private System.Windows.Forms.ToolStripMenuItem salvarComoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
         private System.Windows.Forms.TextBox txt1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxClasse;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxModoOperacao;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown upDownUplink;
     }
 }
 
