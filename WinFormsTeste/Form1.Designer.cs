@@ -146,17 +146,23 @@
             // upDownUplink
             // 
             this.upDownUplink.Increment = new decimal(new int[] {
-            200,
+            1000,
             0,
             0,
             0});
             this.upDownUplink.Location = new System.Drawing.Point(6, 276);
             this.upDownUplink.Maximum = new decimal(new int[] {
-            1000000,
+            9999,
+            0,
+            0,
+            0});
+            this.upDownUplink.Minimum = new decimal(new int[] {
+            1000,
             0,
             0,
             0});
             this.upDownUplink.Name = "upDownUplink";
+            this.upDownUplink.ReadOnly = true;
             this.upDownUplink.Size = new System.Drawing.Size(459, 21);
             this.upDownUplink.TabIndex = 18;
             this.upDownUplink.Value = new decimal(new int[] {

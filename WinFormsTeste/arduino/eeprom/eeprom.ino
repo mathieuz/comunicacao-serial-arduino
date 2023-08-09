@@ -60,9 +60,16 @@ void loop()
     Serial.println(crcCalculado + "\n" == valorCrcRecebido);
     */
 
-    //Verifica se os dois CRCs (recebido e calculado) são iguais.
+    //Verifica se os dois CRCs (recebido e calculado) são iguais. Se sim, os valores podem ser guardados na EEPROM.
     if (crcCalculado == valorCrcRecebido)
     {
+      //Limpa todos os endereços da EEPROM.
+      for (int i = 0; i < EEPROM.length(); i++)
+      {
+        EEPROM.write(i, 0);
+      }
+
+      //Acende o led verde 3 vezes, indicando que as informações foram validadas.
       for (int i = 0; i < 3; i++)
       {
         digitalWrite(ledVerde, HIGH);

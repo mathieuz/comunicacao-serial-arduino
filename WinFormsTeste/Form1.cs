@@ -222,10 +222,12 @@ namespace WinFormsTeste
             switch (valorSelecionado)
             {
                 case "A":
-                    upDownUplink.Enabled = true; break;
+                    upDownUplink.Enabled = true; 
+                    break;
 
                 default:
-                    upDownUplink.Enabled = false; break;
+                    upDownUplink.Enabled = false; 
+                    break;
             }
         }
     }
