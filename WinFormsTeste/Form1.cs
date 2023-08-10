@@ -22,12 +22,6 @@ namespace WinFormsTeste
         //Instanciando objeto de acesso às portas COMs.
         SerialPort _serialPort = new SerialPort();
 
-        //Variável que recebe as strings dos três textboxes.
-        //string strConcat;
-
-        //Recebe o total da soma de todos os limites de caracteres dos três inputs.
-        //int totalMaxLength;
-
         //Array de textboxes
         List<TextBox> listTextbox = new List<TextBox>();
 
@@ -51,8 +45,8 @@ namespace WinFormsTeste
 
 
             //Inicializando comboboxes 'Modo de Operação' e 'Classe'.
-            comboBoxModoOperacao.Items.Add("OTAA"); //Se selecionado, vale 0
-            comboBoxModoOperacao.Items.Add("ABP");  //Se selecionado vale 1
+            comboBoxModoOperacao.Items.Add("OTAA");
+            comboBoxModoOperacao.Items.Add("ABP");
             comboBoxModoOperacao.SelectedIndex = 0;
 
             comboBoxClasse.Items.Add("A");
@@ -119,12 +113,18 @@ namespace WinFormsTeste
 
         }
 
+        //Evento de clique em enviar: os valores definidos nas textboxes e comboboxes são concatenados numa
+        //string só, e seu valor de CRC é calculado em seguida. Os valores, string concatenada e seu CRC, é
+        //enviado para o arduino.
         private void btEnviar_Click(object sender, EventArgs e)
         {
-            string strConcat = txt1.Text + txt2.Text + txt3.Text;
+            //[!!!] Concatenando as configurações definidas em uma string só.
+            string strConcat = $"{txt1.Text + txt2.Text + txt3.Text};{comboBoxModoOperacao.SelectedItem};{comboBoxClasse.SelectedItem};{upDownUplink.Value}";
+
+            //Somando os limites de caracteres dos textboxes referentes à chave. Deve ser igual a quantidade de texto dos três textboxes somados.
             int totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
 
-            if (strConcat.Length == totalMaxLength)
+            if (txt1.Text.Length + txt2.Text.Length + txt3.TextLength == totalMaxLength)
             {
                 //Calculando CRC da string enviada. A string deve ser convertida em um Array de bytes antes.
                 byte[] strConcatBytes = Encoding.UTF8.GetBytes(strConcat);
@@ -134,9 +134,9 @@ namespace WinFormsTeste
 
                 //Formato de string enviada ao serial: "strConcat;strConcatCrc;modoOperacao;classe;tempoEmMsUplink"
 
-                _serialPort.Write(strConcat + ";" + strConcatCrc + ";" + "1" + ";" + "A" + ";" + "3200");   //Escreve a string concatenada com um valor separador (;), que
-                                                                                                            //está concatenada ao valor gerado pelo CRC
-                                                                                                            //na porta serial.
+                _serialPort.Write(strConcat + ";" + strConcatCrc);   //Escreve a string concatenada com um valor separador (;), que
+                                                                     //está concatenada ao valor gerado pelo CRC
+                                                                     //na porta serial.
 
                 //Exibe os valores enviados no console de saída.
                 consoleSaida.AppendText("[!] Enviado: " + strConcat + newLine);

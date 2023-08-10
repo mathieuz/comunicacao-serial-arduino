@@ -2,9 +2,15 @@
 
 using namespace ace_crc::crc16modbus_bit;
 
+const byte ledVerde = 2;
+const byte ledVermelho = 4;
+
 void setup() {
   Serial.begin(9600);
   Serial.setTimeout(10);
+
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
 }
 
 void loop() {
@@ -66,6 +72,18 @@ void loop() {
 
     Serial.print("CRC Calculado: ");
     Serial.println(crcCalculado);
+
+    if (crcCalculado == strConcatCrc)
+    {
+      digitalWrite(ledVerde, HIGH);
+      delay(2000);
+      digitalWrite(ledVerde, LOW);
+
+    } else {
+      digitalWrite(ledVermelho, HIGH);
+      delay(2000);
+      digitalWrite(ledVermelho, LOW);
+    }
 
   }
 
