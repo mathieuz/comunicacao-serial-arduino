@@ -23,10 +23,10 @@ namespace WinFormsTeste
         SerialPort _serialPort = new SerialPort();
 
         //Variável que recebe as strings dos três textboxes.
-        string strConcat;
+        //string strConcat;
 
         //Recebe o total da soma de todos os limites de caracteres dos três inputs.
-        int totalMaxLength;
+        //int totalMaxLength;
 
         //Array de textboxes
         List<TextBox> listTextbox = new List<TextBox>();
@@ -121,18 +121,22 @@ namespace WinFormsTeste
 
         private void btEnviar_Click(object sender, EventArgs e)
         {
-            strConcat = txt1.Text + txt2.Text + txt3.Text;
-            totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
+            string strConcat = txt1.Text + txt2.Text + txt3.Text;
+            int totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
 
             if (strConcat.Length == totalMaxLength)
             {
                 //Calculando CRC da string enviada. A string deve ser convertida em um Array de bytes antes.
                 byte[] strConcatBytes = Encoding.UTF8.GetBytes(strConcat);
                 string strConcatCrc = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes).ToString(); //Recebe o CRC referente à string.
-                //ushort teste = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes);
-                _serialPort.Write(strConcat + ";" + strConcatCrc);   //Escreve a string concatenada com um valor separador (;), que
-                                                                     //está concatenada ao valor gerado pelo CRC
-                                                                     //na porta serial.
+
+                //S93J4NFM23JDNFH4KFHTNCBFHDJKEROPW23DSCJRNFKSWLEM;54809;1;B;1300
+
+                //Formato de string enviada ao serial: "strConcat;strConcatCrc;modoOperacao;classe;tempoEmMsUplink"
+
+                _serialPort.Write(strConcat + ";" + strConcatCrc + ";" + "1" + ";" + "A" + ";" + "3200");   //Escreve a string concatenada com um valor separador (;), que
+                                                                                                            //está concatenada ao valor gerado pelo CRC
+                                                                                                            //na porta serial.
 
                 //Exibe os valores enviados no console de saída.
                 consoleSaida.AppendText("[!] Enviado: " + strConcat + newLine);
@@ -149,7 +153,7 @@ namespace WinFormsTeste
         private void salvarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
+            int totalMaxLength = txt1.MaxLength + txt2.MaxLength + txt3.MaxLength;
 
             if (txt1.Text.Length + txt2.Text.Length + txt3.Text.Length == totalMaxLength)
             {
@@ -223,11 +227,11 @@ namespace WinFormsTeste
             {
                 case "A":
                     upDownUplink.Enabled = true; 
-                    break;
+                break;
 
                 default:
                     upDownUplink.Enabled = false; 
-                    break;
+                break;
             }
         }
     }

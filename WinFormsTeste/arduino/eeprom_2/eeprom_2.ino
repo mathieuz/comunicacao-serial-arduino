@@ -16,7 +16,6 @@ String tempoMsUplink = ""; //Tempo em milissegundos do Uplink
 void setup()
 {
   Serial.begin(9600);
-  Serial.setTimeout(10);
 
   pinMode(ledVerde, OUTPUT);
   pinMode(ledVermelho, OUTPUT);
@@ -86,9 +85,12 @@ void loop()
     
     size_t comprimentoValor = sizeof(strConcatCharArray);
 
+    /*
     crc_t crc = crc_init();
     crc = crc_update(crc, strConcatCharArray, comprimentoValor);
     crc = crc_finalize(crc);
+    */
+    crc_t crc = crc_calculate(strConcatCharArray, comprimentoValor);
 
     String crcCalculado = String(crc);
 
@@ -103,10 +105,12 @@ void loop()
     if (crcCalculado == strConcatCrc)
     {
       //Limpa todos os endereços da EEPROM.
+      /*
       for (int i = 0; i < EEPROM.length(); i++)
       {
         EEPROM.write(i, 0);
       }
+      */
 
       //Acende o led verde 3 vezes, indicando que as informações foram validadas.
       for (int i = 0; i < 3; i++)
@@ -131,5 +135,6 @@ void loop()
       delay(2000);
     }
 
+    Serial.flush();
   }
 }
