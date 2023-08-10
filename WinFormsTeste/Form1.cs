@@ -51,8 +51,8 @@ namespace WinFormsTeste
 
 
             //Inicializando comboboxes 'Modo de Operação' e 'Classe'.
-            comboBoxModoOperacao.Items.Add("OTAA");
-            comboBoxModoOperacao.Items.Add("ABP");
+            comboBoxModoOperacao.Items.Add("OTAA"); //Se selecionado, vale 0
+            comboBoxModoOperacao.Items.Add("ABP");  //Se selecionado vale 1
             comboBoxModoOperacao.SelectedIndex = 0;
 
             comboBoxClasse.Items.Add("A");
