@@ -73,7 +73,7 @@
             this.comboBoxCOM.FormattingEnabled = true;
             this.comboBoxCOM.Location = new System.Drawing.Point(132, 44);
             this.comboBoxCOM.Name = "comboBoxCOM";
-            this.comboBoxCOM.Size = new System.Drawing.Size(351, 21);
+            this.comboBoxCOM.Size = new System.Drawing.Size(399, 21);
             this.comboBoxCOM.TabIndex = 1;
             // 
             // txt1
@@ -81,7 +81,7 @@
             this.txt1.Location = new System.Drawing.Point(6, 44);
             this.txt1.MaxLength = 16;
             this.txt1.Name = "txt1";
-            this.txt1.Size = new System.Drawing.Size(459, 21);
+            this.txt1.Size = new System.Drawing.Size(507, 21);
             this.txt1.TabIndex = 2;
             // 
             // txt2
@@ -89,7 +89,7 @@
             this.txt2.Location = new System.Drawing.Point(6, 102);
             this.txt2.MaxLength = 16;
             this.txt2.Name = "txt2";
-            this.txt2.Size = new System.Drawing.Size(459, 21);
+            this.txt2.Size = new System.Drawing.Size(507, 21);
             this.txt2.TabIndex = 3;
             // 
             // txt3
@@ -97,14 +97,14 @@
             this.txt3.Location = new System.Drawing.Point(6, 159);
             this.txt3.MaxLength = 16;
             this.txt3.Name = "txt3";
-            this.txt3.Size = new System.Drawing.Size(459, 21);
+            this.txt3.Size = new System.Drawing.Size(507, 21);
             this.txt3.TabIndex = 4;
             // 
             // btEnviar
             // 
             this.btEnviar.Location = new System.Drawing.Point(6, 323);
             this.btEnviar.Name = "btEnviar";
-            this.btEnviar.Size = new System.Drawing.Size(459, 31);
+            this.btEnviar.Size = new System.Drawing.Size(507, 31);
             this.btEnviar.TabIndex = 7;
             this.btEnviar.Text = "Enviar";
             this.btEnviar.UseVisualStyleBackColor = true;
@@ -129,7 +129,7 @@
             this.groupBox_Enviar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_Enviar.Location = new System.Drawing.Point(12, 95);
             this.groupBox_Enviar.Name = "groupBox_Enviar";
-            this.groupBox_Enviar.Size = new System.Drawing.Size(471, 360);
+            this.groupBox_Enviar.Size = new System.Drawing.Size(519, 360);
             this.groupBox_Enviar.TabIndex = 8;
             this.groupBox_Enviar.TabStop = false;
             this.groupBox_Enviar.Text = "Enviar";
@@ -163,7 +163,7 @@
             0});
             this.upDownUplink.Name = "upDownUplink";
             this.upDownUplink.ReadOnly = true;
-            this.upDownUplink.Size = new System.Drawing.Size(459, 21);
+            this.upDownUplink.Size = new System.Drawing.Size(507, 21);
             this.upDownUplink.TabIndex = 18;
             this.upDownUplink.Value = new decimal(new int[] {
             1000,
@@ -174,7 +174,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(235, 196);
+            this.label5.Location = new System.Drawing.Point(265, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 15);
             this.label5.TabIndex = 16;
@@ -184,9 +184,9 @@
             // 
             this.comboBoxClasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxClasse.FormattingEnabled = true;
-            this.comboBoxClasse.Location = new System.Drawing.Point(238, 214);
+            this.comboBoxClasse.Location = new System.Drawing.Point(268, 214);
             this.comboBoxClasse.Name = "comboBoxClasse";
-            this.comboBoxClasse.Size = new System.Drawing.Size(227, 23);
+            this.comboBoxClasse.Size = new System.Drawing.Size(245, 23);
             this.comboBoxClasse.TabIndex = 15;
             this.comboBoxClasse.SelectedIndexChanged += new System.EventHandler(this.comboBoxClasse_SelectedIndexChanged);
             // 
@@ -205,7 +205,7 @@
             this.comboBoxModoOperacao.FormattingEnabled = true;
             this.comboBoxModoOperacao.Location = new System.Drawing.Point(6, 214);
             this.comboBoxModoOperacao.Name = "comboBoxModoOperacao";
-            this.comboBoxModoOperacao.Size = new System.Drawing.Size(226, 23);
+            this.comboBoxModoOperacao.Size = new System.Drawing.Size(245, 23);
             this.comboBoxModoOperacao.TabIndex = 13;
             // 
             // label3
@@ -241,7 +241,7 @@
             this.groupBox_Saida.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_Saida.Location = new System.Drawing.Point(12, 461);
             this.groupBox_Saida.Name = "groupBox_Saida";
-            this.groupBox_Saida.Size = new System.Drawing.Size(471, 143);
+            this.groupBox_Saida.Size = new System.Drawing.Size(519, 143);
             this.groupBox_Saida.TabIndex = 9;
             this.groupBox_Saida.TabStop = false;
             this.groupBox_Saida.Text = "Saída";
@@ -254,7 +254,7 @@
             this.consoleSaida.Name = "consoleSaida";
             this.consoleSaida.ReadOnly = true;
             this.consoleSaida.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.consoleSaida.Size = new System.Drawing.Size(459, 111);
+            this.consoleSaida.Size = new System.Drawing.Size(507, 111);
             this.consoleSaida.TabIndex = 0;
             // 
             // menuStrip1
@@ -264,7 +264,7 @@
             this.sobreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(495, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(543, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -301,7 +301,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(495, 616);
+            this.ClientSize = new System.Drawing.Size(543, 616);
             this.Controls.Add(this.groupBox_Saida);
             this.Controls.Add(this.groupBox_Enviar);
             this.Controls.Add(this.comboBoxCOM);
