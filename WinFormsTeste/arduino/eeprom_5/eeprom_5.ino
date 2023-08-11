@@ -20,6 +20,8 @@ void loop() {
     //String e CRC recebido da porta serial.
     String strRecebida = Serial.readString();
 
+    Serial.println("Valor recebido: " + strRecebida + "\n");
+
     //Recebe a substring contendo apenas os valores.
     String strValores = strRecebida.substring(0, strRecebida.lastIndexOf(";")); 
 
@@ -37,8 +39,6 @@ void loop() {
     crc_t crc = crc_calculate(strValoresCharArray, sizeof(strValoresCharArray));
     String crcCalculado = String(crc);
 
-    Serial.println(crcCalculado);
-
     //Se o CRC calculado for igual à o valor de CRC enviado, as informações dos valores 
     //não sofreram mudanças ou perdas durante à transmissão. Os valores (strValores) podem ser armazenados na EEPROM.
     if (crcCalculado == strValoresCrc) 
@@ -46,6 +46,47 @@ void loop() {
       digitalWrite(ledVerde, HIGH);
       delay(2000);
       digitalWrite(ledVerde, LOW);
+
+      //valoresExtraidosArrayString: vai alocar as substrings extraídas de strValores.
+      //Cada substring é um valor. Ao todo, são 4 valores para serem extraídos.
+      String valoresExtraidosArrayString[4];
+
+      //indexSeparador: vai recebendo os índices do separador (;) conforme o loop.
+      //indiceValor: o contador de índice de valoresExtraidosArrayString.
+      int indexSeparador = -1;
+      int indiceValor = 0;
+
+      //Loop que percorre strValores, identifica índices do separador e atribui os valores
+      //dentro do array de valores extraídos.
+      for (int i = 0; i < strValores.length(); i++)
+      {
+        indexSeparador = indexSeparador + 1; //Inicia o loop com 0.
+
+        //Extrai a substring/valor que antecede um separador dentro da string total.
+        String strExtraida = strValores.substring(indexSeparador, strValores.indexOf(";", indexSeparador));
+
+        indexSeparador = strValores.indexOf(";", indexSeparador); //Recebe o índice do próximo separador.
+
+        valoresExtraidosArrayString[indiceValor] = strExtraida; //Atribui o valor no índice atual.
+
+        indiceValor = indiceValor + 1; //Avança para o próximo índice do Array.
+
+        //Se o valor de indexSeparador retornar -1, significa que não foi encontrado
+        //mais nenhum separador dentro da string. O loop encerra.
+        if (indexSeparador == -1){ break; }
+
+      }
+
+      //Recebe os valores de strValores individualmente, em variáveis separadas.
+      String chave = valoresExtraidosArrayString[0];
+      String modoOperacao = valoresExtraidosArrayString[1];
+      String classe = valoresExtraidosArrayString[2];
+      String tempoMsUplink = valoresExtraidosArrayString[3];
+
+      Serial.println("Chave: " + chave);
+      Serial.print("Modo de Operação: "); Serial.println(modoOperacao == "0" ? "OTAA" : "ABP");
+      Serial.println("Classe: " + classe);
+      Serial.println("Tempo em milissegundos do Uplink: " + tempoMsUplink);
 
     } else {
       digitalWrite(ledVermelho, HIGH);

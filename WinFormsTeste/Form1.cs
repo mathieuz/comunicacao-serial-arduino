@@ -138,8 +138,7 @@ namespace WinFormsTeste
                 string strConcatCrc = Crc16.ComputeChecksum(Crc16Algorithm.Modbus, strConcatBytes).ToString(); //Recebe o CRC referente à string.
 
                 _serialPort.Write(strConcat + ";" + strConcatCrc);   //Escreve a string concatenada com um valor separador (;), que
-                                                                     //está concatenada ao valor gerado pelo CRC
-                                                                     //na porta serial.
+                                                                     //está concatenada ao valor gerado pelo CRC na porta serial.
 
                 //Exibe os valores enviados no console de saída.
                 consoleSaida.AppendText("[!] Enviado: " + strConcat + newLine);
