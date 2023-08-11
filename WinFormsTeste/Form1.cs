@@ -220,7 +220,7 @@ namespace WinFormsTeste
             }
         }
 
-        //Verifica se o valor de classe selecionado é igual a A: se sim, a opção de inserir
+        //Verifica se o valor de classe selecionado é igual a 'A': se sim, a opção de inserir
         //um valor de uplink é habilitada.
         private void comboBoxClasse_SelectedIndexChanged(object sender, EventArgs e)
         {

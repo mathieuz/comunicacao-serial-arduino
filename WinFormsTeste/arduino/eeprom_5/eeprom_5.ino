@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <AceCRC.h>
 
 using namespace ace_crc::crc16modbus_bit;
@@ -88,11 +89,22 @@ void loop() {
       Serial.println("Classe: " + classe);
       Serial.println("Tempo em milissegundos do Uplink: " + tempoMsUplink);
 
+      //Limpa todos os endereços da EEPROM.
+      for (int i = 0; i < EEPROM.length(); i++)
+      {
+        EEPROM.write(i, 0);
+      }
+
+      //Preenchendo os primeiros endereços com o valor de chave.
+      for (int i = 0; i < chave.length(); i++)
+      {
+        EEPROM.write(i, chave[i]);
+      }
+
     } else {
       digitalWrite(ledVermelho, HIGH);
       delay(2000);
       digitalWrite(ledVermelho, LOW);
-
     }
   }
 
