@@ -312,7 +312,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Comunicação Serial - Arduino";
+            this.Text = "Comunicação Serial";
             this.groupBox_Enviar.ResumeLayout(false);
             this.groupBox_Enviar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upDownUplink)).EndInit();

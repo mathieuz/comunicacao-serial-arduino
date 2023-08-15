@@ -233,7 +233,8 @@ namespace WinFormsTeste
                 break;
 
                 default:
-                    upDownUplink.Enabled = false; 
+                    upDownUplink.Enabled = false;
+                    upDownUplink.Value = 1000; //O valor padrão do Uplink para todas as classes selecionadas que não forem 'A'.
                 break;
             }
         }

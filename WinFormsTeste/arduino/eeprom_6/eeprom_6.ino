@@ -27,7 +27,7 @@ void loop() {
     String strValores = strRecebida.substring(0, strRecebida.lastIndexOf(";")); 
 
     //Recebe a subsstring do CRC dos valores.
-    String strValoresCrc = strRecebida.substring(strRecebida.lastIndexOf(";") + 1, strRecebida.length() - 1);
+    String strValoresCrc = strRecebida.substring(strRecebida.lastIndexOf(";") + 1, strRecebida.length());
     
     //Criando e atribuindo um array de char dos valores recebidos (strValores) para cálculo de CRC.
     char strValoresCharArray[strValores.length()];
